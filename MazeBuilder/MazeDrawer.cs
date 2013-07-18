@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace MazeBuilder
 {
@@ -15,7 +16,7 @@ namespace MazeBuilder
          this.graphics = graphics;
          this.maze = maze;
 
-         cellWidth = windowHeight < windowWidth ? windowHeight/maze.Height : windowWidth/maze.Width;//Fix
+         cellWidth = Math.Min(windowWidth, windowHeight)/Math.Max(maze.Width, maze.Height);
          currentPoint = new Point(cellWidth, cellWidth);
       }
 
@@ -49,14 +50,12 @@ namespace MazeBuilder
          if (IsVerticalWall(index))
             DrawVerticalWall();
          else
-            DrawHorizontalWall();
-
-         IncreaseYPositionIfNeeded(index);
+            DrawHorizontalWall(index);    
       }
 
       private bool IsVerticalWall(int index)
       {
-         return index%2 == 0;
+         return CurrentRowIsEven(index) ? index%2 == 0 : index%2 == 1;
       }
 
       private void DrawVerticalWall()
@@ -65,23 +64,15 @@ namespace MazeBuilder
          graphics.DrawLine(Pen, currentPoint, endPoint);
       }
 
-      private void DrawHorizontalWall()
+      private void DrawHorizontalWall(int index)
       {
          var endPoint = new Point(currentPoint.X - cellWidth, currentPoint.Y);
          graphics.DrawLine(Pen, currentPoint, endPoint);
-         
-         currentPoint.X += cellWidth;
-      }
 
-      private void IncreaseYPositionIfNeeded(int index)
-      {
          if (WallIsAtRowEnd(index))
             GoToNextRow();
-      }
-
-      private bool WallIsAtRowEnd(int index)
-      {
-         return index%((maze.Width*2) - 1) == 0;
+         else
+            currentPoint.X += cellWidth;
       }
 
       private void GoToNextRow()
@@ -102,6 +93,17 @@ namespace MazeBuilder
          }
 
          currentPoint.X += cellWidth;
+      }
+
+      private int count = 0;
+      private bool WallIsAtRowEnd(int index)
+      {
+         return (count++%maze.Width) == 0; //index%((maze.Width*2) - 2) == 0;
+      }
+
+      private bool CurrentRowIsEven(int index)
+      {
+         return index/((maze.Width*2) - 2) % 2 == 0;
       }
    }
 }

@@ -11,7 +11,7 @@ namespace MazeBuilder
          IList<Set<int>> sets = ConstructSets(totalCells);
          IList<Wall> walls = ConstructWalls(sets, width, height);
 
-         RandomlyDestroyWalls(walls, sets);
+         //RandomlyDestroyWalls(walls, sets);
 
          return new Maze(walls, height, width);
       }
