@@ -14,7 +14,7 @@ namespace MazeBuilder
       }
 
       public Set(T primingItem)
-         : this(new[] { primingItem })
+         : this(new[] { primingItem }) 
       {
 
       }

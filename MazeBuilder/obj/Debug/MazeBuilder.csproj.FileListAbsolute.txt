@@ -1,1 +1,10 @@
 C:\ws\MilesAndJon\MazeBuilder\WindowsFormsApplication1\bin\Debug\MazeBuilder.exe.config
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\bin\Debug\MazeBuilder.exe.config
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\bin\Debug\MazeBuilder.exe
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\bin\Debug\MazeBuilder.pdb
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.csprojResolveAssemblyReference.cache
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.Properties.Resources.resources
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.csproj.GenerateResource.Cache
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.exe
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.pdb
+C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.MainWindow.resources
