@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MazeBuilder
 {
@@ -9,14 +10,16 @@ namespace MazeBuilder
       {
          int totalCells = width*height;
          IList<Set<int>> sets = ConstructSets(totalCells);
-         IList<Wall> walls = ConstructWalls(sets, width, height);
-
-         //RandomlyDestroyWalls(walls, sets);
-
-         return new Maze(walls, height, width);
+         //IList<Wall> walls = ConstructWalls(sets, width, height);
+         IList<Corner> corners = ConstructWalls(sets, width, height);
+          
+         //RandomlyDestroyWalls(corners, sets);
+         
+         return new Maze(corners, height, width);
       }
 
-      private static void RandomlyDestroyWalls(IList<Wall> walls, IList<Set<int>> sets)
+      //private static void RandomlyDestroyWalls(IList<Wall> walls, IList<Set<int>> sets)
+      private static void RandomlyDestroyWalls(IList<Corner> walls, IList<Set<int>> sets)
       {
          var indexOrder = GenerateListOfSequentialNumbers(walls.Count);
          ShuffleList(indexOrder);
@@ -25,12 +28,19 @@ namespace MazeBuilder
             RemoveIfNeeded(walls[index]);
       }
 
-      private static void RemoveIfNeeded(Wall wall)
+      //private static void RemoveIfNeeded(Wall corner)
+      private static void RemoveIfNeeded(Corner corner)
       {
-         if (wall.SeparatesDisjointCellSets)
+         if (corner.Right.SeparatesDisjointCellSets)
          {
-            wall.KnockDown();
-            wall.MergeCells();
+            corner.Right.KnockDown();
+            corner.Right.MergeCells();
+         }
+
+         if (corner.Bottom.SeparatesDisjointCellSets)
+         {          
+            corner.Bottom.KnockDown();
+            corner.Bottom.MergeCells();
          }
       }
 
@@ -68,23 +78,36 @@ namespace MazeBuilder
          return sets;
       } 
 
-      private static IList<Wall> ConstructWalls(IList<Set<int>> sets, int width, int height)
+      //private static IList<Wall> ConstructWalls(IList<Set<int>> sets, int width, int height)
+      private static IList<Corner> ConstructWalls(IList<Set<int>> sets, int width, int height)
       {
-         var walls = new List<Wall>();
+         //var corners = new List<Wall>();
+         var corners = new List<Corner>();
 
          for (int i = 0; i < sets.Count; i++)
-            AddRightAndBottomWallAsNeeded(walls, sets, i, width, height);
+            AddRightAndBottomWallAsNeeded(corners, sets, i, width, height);
 
-         return walls;
+         return corners;
       }
 
-      private static void AddRightAndBottomWallAsNeeded(IList<Wall> walls, IList<Set<int>> sets, int setIndex, int width, int height)
+      //private static void AddRightAndBottomWallAsNeeded(IList<Wall> corners, IList<Set<int>> sets, int setIndex, int width, int height)
+      private static void AddRightAndBottomWallAsNeeded(IList<Corner> corners, IList<Set<int>> sets, int setIndex, int width, int height)
       {
+         var corner = new Corner();
+         //if (NeedsRightWall(setIndex, width, height))
+         //   corners.Add(new Wall(sets[setIndex], sets[setIndex + 1]));
+
          if (NeedsRightWall(setIndex, width, height))
-            walls.Add(new Wall(sets[setIndex], sets[setIndex + 1]));
+            corner.Right = new Wall(sets[setIndex], sets[setIndex + 1]);
+
+         //if (NeedsBottomWall(setIndex, width, height))
+         //   corners.Add(new Wall(sets[setIndex], sets[setIndex + width]));
 
          if (NeedsBottomWall(setIndex, width, height))
-            walls.Add(new Wall(sets[setIndex], sets[setIndex + width]));
+            corner.Bottom = new Wall(sets[setIndex], sets[setIndex + width]);
+
+         corners.Add(corner);
+
       }
       
       private static bool NeedsRightWall(int index, int width, int height)

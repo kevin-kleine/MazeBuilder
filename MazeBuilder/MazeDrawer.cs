@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 
 namespace MazeBuilder
 {
@@ -10,6 +11,7 @@ namespace MazeBuilder
       private readonly Maze maze;
       private readonly int cellWidth;
       private Point currentPoint;
+      private int count = 0;
 
       public MazeDrawer(Graphics graphics, Maze maze, int windowHeight, int windowWidth)
       {
@@ -95,7 +97,6 @@ namespace MazeBuilder
          currentPoint.X += cellWidth;
       }
 
-      private int count = 0;
       private bool WallIsAtRowEnd(int index)
       {
          return (count++%maze.Width) == 0; //index%((maze.Width*2) - 2) == 0;
