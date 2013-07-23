@@ -4,9 +4,8 @@ namespace MazeBuilder
 {
    public class Maze
    {
-      public Maze(/*IList<Wall> walls,*/ IList<Corner> corners, int height, int width)
+      public Maze(IList<Corner> corners, int height, int width)
       {
-         //Walls = walls;
          Corners = corners;
          Height = height;
          Width = width;

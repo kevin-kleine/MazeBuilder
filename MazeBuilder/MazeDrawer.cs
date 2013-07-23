@@ -39,9 +39,9 @@ namespace MazeBuilder
 
       private void DrawWallIfUp(int index)
       {
-         var wall = maze.Walls[index];
-         
-         if (wall.IsUp)
+         var corner = maze.Corners[index];
+
+         if (corner.Right.IsUp)
             DrawWall(index);
          else
             SkipWall(index);

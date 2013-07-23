@@ -12,6 +12,11 @@
          IsUp = true;
       }
 
+      public Wall()
+      {
+         IsUp = false;
+      }
+
       
       public bool IsUp { get; private set; }
       
