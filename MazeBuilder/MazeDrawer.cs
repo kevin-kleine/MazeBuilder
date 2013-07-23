@@ -11,7 +11,6 @@ namespace MazeBuilder
       private readonly Maze maze;
       private readonly int cellWidth;
       private Point currentPoint;
-      private int count = 0;
 
       public MazeDrawer(Graphics graphics, Maze maze, int windowHeight, int windowWidth)
       {
@@ -26,7 +25,7 @@ namespace MazeBuilder
       {
          DrawMazeBorder();
 
-         for (int i = 0; i < maze.Walls.Count; i++)
+         for (int i = 0; i < maze.Corners.Count; i++)
             DrawWallIfUp(i);
       }
 
@@ -42,22 +41,20 @@ namespace MazeBuilder
          var corner = maze.Corners[index];
 
          if (corner.Right.IsUp)
-            DrawWall(index);
-         else
-            SkipWall(index);
-      }
-
-      private void DrawWall(int index)
-      {
-         if (IsVerticalWall(index))
             DrawVerticalWall();
-         else
-            DrawHorizontalWall(index);    
+         
+         if (corner.Bottom.IsUp)
+            DrawHorizontalWall();
+
+         MoveToNextCell(index);
       }
 
-      private bool IsVerticalWall(int index)
+      private void MoveToNextCell(int index)
       {
-         return CurrentRowIsEven(index) ? index%2 == 0 : index%2 == 1;
+         if (IsLastCellInRow(index))
+            GoToNextRow();
+         else
+            currentPoint.X += cellWidth;
       }
 
       private void DrawVerticalWall()
@@ -66,15 +63,10 @@ namespace MazeBuilder
          graphics.DrawLine(Pen, currentPoint, endPoint);
       }
 
-      private void DrawHorizontalWall(int index)
+      private void DrawHorizontalWall()
       {
          var endPoint = new Point(currentPoint.X - cellWidth, currentPoint.Y);
          graphics.DrawLine(Pen, currentPoint, endPoint);
-
-         if (WallIsAtRowEnd(index))
-            GoToNextRow();
-         else
-            currentPoint.X += cellWidth;
       }
 
       private void GoToNextRow()
@@ -83,28 +75,9 @@ namespace MazeBuilder
          currentPoint.X = cellWidth;
       }
 
-      private void SkipWall(int index)
+      private bool IsLastCellInRow(int index)
       {
-         if (IsVerticalWall(index))
-            return;
-         
-         if (WallIsAtRowEnd(index))
-         {
-            GoToNextRow();
-            return;
-         }
-
-         currentPoint.X += cellWidth;
-      }
-
-      private bool WallIsAtRowEnd(int index)
-      {
-         return (count++%maze.Width) == 0; //index%((maze.Width*2) - 2) == 0;
-      }
-
-      private bool CurrentRowIsEven(int index)
-      {
-         return index/((maze.Width*2) - 2) % 2 == 0;
+         return (index + 1)%maze.Width == 0;
       }
    }
 }
