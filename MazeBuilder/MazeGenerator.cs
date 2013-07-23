@@ -11,15 +11,18 @@ namespace MazeBuilder
          int totalCells = width*height;
          IList<Set<int>> sets = ConstructSets(totalCells);
          IList<Corner> corners = ConstructWalls(sets, width, height);
-          
-         //RandomlyDestroyWalls(corners, sets);
 
-         int count = corners.Select(x => x.Right.IsUp && x.Bottom.IsUp).AsEnumerable().Count();
-         
+         IList<Wall> rightWalls = corners.Select(x => x.Right).ToList();
+         IList<Wall> bottomWalls = corners.Select(x => x.Bottom).ToList();
+         IList<Wall> walls = rightWalls.Union(bottomWalls).ToList();
+
+          
+         RandomlyDestroyWalls(walls, sets);
+
          return new Maze(corners, height, width);
       }
 
-      private static void RandomlyDestroyWalls(IList<Corner> walls, IList<Set<int>> sets)
+      private static void RandomlyDestroyWalls(IList<Wall> walls, IList<Set<int>> sets)
       {
          var indexOrder = GenerateListOfSequentialNumbers(walls.Count);
          ShuffleList(indexOrder);
@@ -28,18 +31,12 @@ namespace MazeBuilder
             RemoveIfNeeded(walls[index]);
       }
 
-      private static void RemoveIfNeeded(Corner corner)
+      private static void RemoveIfNeeded(Wall wall)
       {
-         if (corner.Right.IsUp && corner.Right.SeparatesDisjointCellSets)
+         if (wall.IsUp && wall.SeparatesDisjointCellSets)
          {
-            corner.Right.KnockDown();
-            corner.Right.MergeCells();
-         }
-
-         if (corner.Bottom.IsUp && corner.Bottom.SeparatesDisjointCellSets)
-         {          
-            corner.Bottom.KnockDown();
-            corner.Bottom.MergeCells();
+            wall.KnockDown();
+            wall.MergeCells();
          }
       }
 
