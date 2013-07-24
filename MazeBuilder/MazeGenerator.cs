@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MazeBuilder
 {
@@ -12,17 +11,19 @@ namespace MazeBuilder
          IList<Set<int>> sets = ConstructSets(totalCells);
          IList<Corner> corners = ConstructWalls(sets, width, height);
 
-         IList<Wall> rightWalls = corners.Select(x => x.Right).ToList();
-         IList<Wall> bottomWalls = corners.Select(x => x.Bottom).ToList();
-         IList<Wall> walls = rightWalls.Union(bottomWalls).ToList();
+         IList<Wall> walls = new List<Wall>();
+         foreach (var corner in corners)
+         {
+            walls.Add(corner.Bottom);
+            walls.Add(corner.Right);
+         }
 
-          
-         RandomlyDestroyWalls(walls, sets);
+         RandomlyDestroyWalls(walls);
 
          return new Maze(corners, height, width);
       }
 
-      private static void RandomlyDestroyWalls(IList<Wall> walls, IList<Set<int>> sets)
+      private static void RandomlyDestroyWalls(IList<Wall> walls)
       {
          var indexOrder = GenerateListOfSequentialNumbers(walls.Count);
          ShuffleList(indexOrder);
@@ -88,7 +89,7 @@ namespace MazeBuilder
       {
          var corner = new Corner();
 
-         if (NeedsRightWall(setIndex, width, height))
+         if (NeedsRightWall(setIndex, width))
             corner.Right = new Wall(sets[setIndex], sets[setIndex + 1]);
          else
             corner.Right = new Wall();
@@ -99,10 +100,9 @@ namespace MazeBuilder
             corner.Bottom = new Wall();
 
          corners.Add(corner);
-
       }
       
-      private static bool NeedsRightWall(int index, int width, int height)
+      private static bool NeedsRightWall(int index, int width)
       {
          return (index + 1)%width != 0;
       }

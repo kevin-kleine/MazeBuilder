@@ -1,4 +1,6 @@
-﻿namespace MazeBuilder
+﻿using System;
+
+namespace MazeBuilder
 {
    public class Wall
    {
@@ -27,14 +29,36 @@
       
       public void MergeCells()
       {
+         Console.WriteLine("cell1 contains: ");
+         WriteContentsOfCell(cell1);
+
+         Console.WriteLine("cell2 contains: ");
+         WriteContentsOfCell(cell2);
+
          cell1.Merge(cell2);
          cell2.Merge(cell1);
+
+
+         Console.WriteLine("cell1 now contains after merge: ");
+         WriteContentsOfCell(cell1);
+
+         Console.WriteLine("cell2 now contains after merge: ");
+         WriteContentsOfCell(cell2);
+
+
+         Console.WriteLine("____________________________________________________________");
       }
 
       public void KnockDown()
       {
          IsUp = false;
       }
-      
+
+      private static void WriteContentsOfCell(Set<int> cell)
+      {
+         string contents = String.Join(", ", cell);
+         Console.WriteLine(contents);
+      }
+
    }
 }
