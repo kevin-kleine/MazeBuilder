@@ -4,8 +4,8 @@ namespace MazeBuilder
 {
    public class Wall
    {
-      private readonly Set<int> cell1;
-      private readonly Set<int> cell2;
+      public  Set<int> cell1;
+      public  Set<int> cell2;
       
       public Wall(Set<int> cell1, Set<int> cell2)
       {

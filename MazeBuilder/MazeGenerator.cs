@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MazeBuilder
 {
@@ -18,27 +19,40 @@ namespace MazeBuilder
             walls.Add(corner.Right);
          }
 
-         RandomlyDestroyWalls(walls);
+         RandomlyDestroyWalls(walls, sets);
 
          return new Maze(corners, height, width);
       }
 
-      private static void RandomlyDestroyWalls(IList<Wall> walls)
+      private static void RandomlyDestroyWalls(IList<Wall> walls, IList<Set<int>> sets)
       {
          var indexOrder = GenerateListOfSequentialNumbers(walls.Count);
          ShuffleList(indexOrder);
 
          foreach (int index in indexOrder)
-            RemoveIfNeeded(walls[index]);
+            RemoveIfNeeded(walls[index], sets);
       }
 
-      private static void RemoveIfNeeded(Wall wall)
+      private static void RemoveIfNeeded(Wall wall, IList<Set<int>> sets)
       {
          if (wall.IsUp && wall.SeparatesDisjointCellSets)
          {
             wall.KnockDown();
-            wall.MergeCells();
+            //wall.MergeCells();
+            MergeCells(wall, sets);
          }
+      }
+
+      private static void MergeCells(Wall wall, IList<Set<int>> sets)
+      {
+         wall.cell1.Merge(wall.cell2);
+         wall.cell2.Merge(wall.cell1);
+         foreach (var cell in wall.cell1)
+         {
+            wall.cell1.Merge(sets[cell]);
+            sets[cell].Merge(wall.cell2);
+         }
+         wall.cell2.Merge(wall.cell1);
       }
 
       private static IList<int> GenerateListOfSequentialNumbers(int count)
