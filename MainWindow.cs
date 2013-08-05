@@ -5,6 +5,9 @@ namespace MazeBuilder
 {
    public partial class MainWindow : Form
    {
+      private ImageBox imageBox;
+      private Maze maze;
+
       public MainWindow()
       {
          InitializeComponent();
@@ -13,19 +16,24 @@ namespace MazeBuilder
       private void drawButton_Click(object sender, System.EventArgs e)
       {
          Controls.Clear();
-         var maze = MazeGenerator.Generate(200, 200);
+         maze = MazeGenerator.Generate(1000, 1000);
 
-         var imageBox = new ImageBox
+         imageBox = new ImageBox
          {
-            Width = 10 * 200,
-            Height = 10 * 200
+            Width = 10 * 1000,
+            Height = 10 * 1000
          };
          Controls.Add(imageBox);
-         
-         var graphics = imageBox.CreateGraphics();
-         graphics.Clear(Color.SlateGray);
-         var mazeDrawer = new MazeDrawer(graphics, maze, Height, Width);
 
+         imageBox.Paint += OnPaint;
+      }
+
+      private void OnPaint(object sender, PaintEventArgs e)
+      {
+         Graphics g = e.Graphics;
+
+         g.Clear(Color.SlateGray);
+         var mazeDrawer = new MazeDrawer(g, maze, Height, Width);
          mazeDrawer.DrawMaze();
       }
 
@@ -33,6 +41,11 @@ namespace MazeBuilder
       {
          MazeGenerationAnalyzer.AnalyzeMazeGeneration(10000, 1000000, 10000);
          MessageBox.Show("Finished!");
+      }
+
+      private void MainWindow_Load(object sender, System.EventArgs e)
+      {
+
       }
    }
 }

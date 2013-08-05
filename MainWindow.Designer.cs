@@ -62,6 +62,7 @@
          this.Controls.Add(this.drawButton);
          this.Name = "MainWindow";
          this.Text = "MainWindow";
+         this.Load += new System.EventHandler(this.MainWindow_Load);
          this.ResumeLayout(false);
 
       }
