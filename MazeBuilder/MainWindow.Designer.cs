@@ -29,11 +29,12 @@
       private void InitializeComponent()
       {
          this.drawButton = new System.Windows.Forms.Button();
+         this.analyzeButton = new System.Windows.Forms.Button();
          this.SuspendLayout();
          // 
          // drawButton
          // 
-         this.drawButton.Location = new System.Drawing.Point(1110, 875);
+         this.drawButton.Location = new System.Drawing.Point(646, 439);
          this.drawButton.Name = "drawButton";
          this.drawButton.Size = new System.Drawing.Size(75, 23);
          this.drawButton.TabIndex = 0;
@@ -41,11 +42,22 @@
          this.drawButton.UseVisualStyleBackColor = true;
          this.drawButton.Click += new System.EventHandler(this.drawButton_Click);
          // 
+         // analyzeButton
+         // 
+         this.analyzeButton.Location = new System.Drawing.Point(565, 439);
+         this.analyzeButton.Name = "analyzeButton";
+         this.analyzeButton.Size = new System.Drawing.Size(75, 23);
+         this.analyzeButton.TabIndex = 1;
+         this.analyzeButton.Text = "Analyze";
+         this.analyzeButton.UseVisualStyleBackColor = true;
+         this.analyzeButton.Click += new System.EventHandler(this.analyzeButton_Click);
+         // 
          // MainWindow
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(1186, 899);
+         this.ClientSize = new System.Drawing.Size(733, 474);
+         this.Controls.Add(this.analyzeButton);
          this.Controls.Add(this.drawButton);
          this.Name = "MainWindow";
          this.Text = "MainWindow";
@@ -56,6 +68,7 @@
       #endregion
 
       private System.Windows.Forms.Button drawButton;
+      private System.Windows.Forms.Button analyzeButton;
    }
 }
 

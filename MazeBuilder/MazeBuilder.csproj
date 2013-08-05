@@ -45,10 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Corner.cs" />
+    <Compile Include="DisjointSet.cs" />
     <Compile Include="Maze.cs" />
     <Compile Include="MazeDrawer.cs" />
+    <Compile Include="MazeGenerationAnalyzer.cs" />
     <Compile Include="MazeGenerator.cs" />
-    <Compile Include="Set.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

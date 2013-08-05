@@ -8,3 +8,12 @@ C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.csproj.GenerateR
 C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.exe
 C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.pdb
 C:\ws\MilesAndJon\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.MainWindow.resources
+c:\ws\MazeBuilder\MazeBuilder\bin\Debug\MazeBuilder.exe.config
+c:\ws\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.exe
+c:\ws\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.pdb
+c:\ws\MazeBuilder\MazeBuilder\bin\Debug\MazeBuilder.exe
+c:\ws\MazeBuilder\MazeBuilder\bin\Debug\MazeBuilder.pdb
+c:\ws\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.csprojResolveAssemblyReference.cache
+c:\ws\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.MainWindow.resources
+c:\ws\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.Properties.Resources.resources
+c:\ws\MazeBuilder\MazeBuilder\obj\Debug\MazeBuilder.csproj.GenerateResource.Cache
