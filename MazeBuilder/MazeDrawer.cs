@@ -5,8 +5,8 @@ namespace MazeBuilder
 {
    public class MazeDrawer
    {
-      private readonly Graphics graphics;
       private static readonly Pen Pen = Pens.LightYellow;
+      private readonly Graphics graphics;
       private readonly Maze maze;
       private readonly int cellWidth;
       private Point currentPoint;
@@ -16,7 +16,8 @@ namespace MazeBuilder
          this.graphics = graphics;
          this.maze = maze;
 
-         cellWidth = Math.Min(windowWidth, windowHeight)/Math.Max(maze.Width, maze.Height);
+         //cellWidth = Math.Min(windowWidth, windowHeight) / Math.Max(maze.Width, maze.Height);
+         cellWidth = 10;
          currentPoint = new Point(cellWidth, cellWidth);
       }
 
@@ -24,7 +25,8 @@ namespace MazeBuilder
       {
          DrawMazeBorder();
 
-         for (int i = 0; i < maze.Corners.Count; i++)
+         var numberOfCorners = maze.Corners.Count;
+         for (var i = 0; i < numberOfCorners; i++)
             DrawWallIfUp(i);
       }
 

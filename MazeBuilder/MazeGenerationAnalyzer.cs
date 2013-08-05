@@ -7,7 +7,7 @@ namespace MazeBuilder
    {
       public static void AnalyzeMazeGeneration(int mazeStartSize, int mazeEndSize, int mazeSizeDensity)
       {
-         using (var writer = new StreamWriter(@"C:\ws\MazeBuilder\MazeBuilder\GenerationTimes.txt"))
+         using (var writer = new StreamWriter(@"..\..\GenerationTimes.txt"))
          {
             for (int currentMazeSize = mazeStartSize;
                currentMazeSize <= mazeEndSize;
@@ -18,7 +18,7 @@ namespace MazeBuilder
                var start = DateTime.Now;
                MazeGenerator.Generate(demension, demension);
                var end = DateTime.Now;
-               writer.WriteLine("{0}, {1}", currentMazeSize, (end - start).Milliseconds);
+               writer.WriteLine("{0}, {1}", currentMazeSize, (end - start).Seconds.ToString() + ((end-start).Milliseconds / 1000.0).ToString(".###"));
             }
          }
       } 

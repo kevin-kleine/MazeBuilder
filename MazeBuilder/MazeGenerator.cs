@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace MazeBuilder
 {
@@ -8,7 +7,7 @@ namespace MazeBuilder
    {
       public static Maze Generate(int height, int width)
       {
-         int totalCells = width*height;
+         var totalCells = width*height;
          var cells = new DisjointSet(totalCells);
          IList<Corner> corners = ConstructWalls(width, height);
 
@@ -21,8 +20,8 @@ namespace MazeBuilder
 
          RandomlyDestroyWalls(walls, cells);
 
-         int parent = cells.Find(1);
-         MessageBox.Show("Generation completed. Parent node is " + parent + " with a depth of " + cells[parent]);
+         //int parent = cells.Find(1);
+         //MessageBox.Show("Generation completed. Parent node is " + parent + " with a depth of " + cells[parent]);
 
          return new Maze(corners, height, width);
       }
@@ -77,17 +76,11 @@ namespace MazeBuilder
 
       private static void AddRightAndBottomWallAsNeeded(IList<Corner> corners, int setIndex, int width, int height)
       {
-         var corner = new Corner();
-
-         if (NeedsRightWall(setIndex, width))
-            corner.Right = new Wall(setIndex, setIndex + 1);
-         else
-            corner.Right = new Wall();
-         
-         if (NeedsBottomWall(setIndex, width, height))
-            corner.Bottom = new Wall(setIndex, setIndex + width);
-         else
-            corner.Bottom = new Wall();
+         var corner = new Corner
+         {
+            Right = NeedsRightWall(setIndex, width) ? new Wall(setIndex, setIndex + 1) : new Wall(),
+            Bottom = NeedsBottomWall(setIndex, width, height) ? new Wall(setIndex, setIndex + width) : new Wall()
+         };
 
          corners.Add(corner);
       }

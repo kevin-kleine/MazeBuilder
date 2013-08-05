@@ -12,10 +12,20 @@ namespace MazeBuilder
 
       private void drawButton_Click(object sender, System.EventArgs e)
       {
-         var maze = MazeGenerator.Generate(1000, 1000);
-         var graphics = CreateGraphics();
+         Controls.Clear();
+         var maze = MazeGenerator.Generate(200, 200);
+
+         var imageBox = new ImageBox
+         {
+            Width = 10 * 200,
+            Height = 10 * 200
+         };
+         Controls.Add(imageBox);
+         
+         var graphics = imageBox.CreateGraphics();
          graphics.Clear(Color.SlateGray);
          var mazeDrawer = new MazeDrawer(graphics, maze, Height, Width);
+
          mazeDrawer.DrawMaze();
       }
 
