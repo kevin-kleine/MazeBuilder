@@ -43,6 +43,8 @@
          this.startSizeNumeric = new System.Windows.Forms.NumericUpDown();
          this.label5 = new System.Windows.Forms.Label();
          this.label6 = new System.Windows.Forms.Label();
+         this.printButton = new System.Windows.Forms.Button();
+         this.progressBar1 = new System.Windows.Forms.ProgressBar();
          ((System.ComponentModel.ISupportInitialize)(this.mazeWidthNumeric)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.mazeHeightNumeric)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.cellSizeNumeric)).BeginInit();
@@ -112,7 +114,7 @@
          this.mazeWidthNumeric.TabIndex = 4;
          this.mazeWidthNumeric.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
          this.mazeWidthNumeric.Value = new decimal(new int[] {
-            1,
+            200,
             0,
             0,
             0});
@@ -136,7 +138,7 @@
          this.mazeHeightNumeric.TabIndex = 5;
          this.mazeHeightNumeric.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
          this.mazeHeightNumeric.Value = new decimal(new int[] {
-            1,
+            200,
             0,
             0,
             0});
@@ -165,7 +167,7 @@
          this.cellSizeNumeric.TabIndex = 7;
          this.cellSizeNumeric.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
          this.cellSizeNumeric.Value = new decimal(new int[] {
-            2,
+            10,
             0,
             0,
             0});
@@ -272,12 +274,32 @@
          this.label6.TabIndex = 8;
          this.label6.Text = "Start Size:";
          // 
+         // printButton
+         // 
+         this.printButton.Location = new System.Drawing.Point(138, 231);
+         this.printButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+         this.printButton.Name = "printButton";
+         this.printButton.Size = new System.Drawing.Size(112, 35);
+         this.printButton.TabIndex = 14;
+         this.printButton.Text = "Print";
+         this.printButton.UseVisualStyleBackColor = true;
+         this.printButton.Click += new System.EventHandler(this.printButton_Click);
+         // 
+         // progressBar1
+         // 
+         this.progressBar1.Location = new System.Drawing.Point(18, 231);
+         this.progressBar1.Name = "progressBar1";
+         this.progressBar1.Size = new System.Drawing.Size(112, 32);
+         this.progressBar1.TabIndex = 15;
+         // 
          // MainWindow
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.AutoScroll = true;
-         this.ClientSize = new System.Drawing.Size(268, 234);
+         this.ClientSize = new System.Drawing.Size(268, 275);
+         this.Controls.Add(this.progressBar1);
+         this.Controls.Add(this.printButton);
          this.Controls.Add(this.incrementByNumeric);
          this.Controls.Add(this.label4);
          this.Controls.Add(this.endSizeNumeric);
@@ -327,6 +349,8 @@
       private System.Windows.Forms.NumericUpDown startSizeNumeric;
       private System.Windows.Forms.Label label5;
       private System.Windows.Forms.Label label6;
+      private System.Windows.Forms.Button printButton;
+      private System.Windows.Forms.ProgressBar progressBar1;
    }
 }
 
