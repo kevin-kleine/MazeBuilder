@@ -14,6 +14,6 @@ namespace MazeBuilder
       public int Width { get; private set; }
       public int Height { get; private set; }
       public IList<Wall> Walls { get; private set; }
-      public IList<Corner> Corners { get; private set; } 
+      public IList<Corner> Corners { get; private set; }
    }
 }

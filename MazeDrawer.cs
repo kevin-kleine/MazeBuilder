@@ -11,13 +11,11 @@ namespace MazeBuilder
       private readonly int cellWidth;
       private Point currentPoint;
 
-      public MazeDrawer(Graphics graphics, Maze maze, int windowHeight, int windowWidth)
+      public MazeDrawer(Graphics graphics, Maze maze, int cellSize)
       {
          this.graphics = graphics;
          this.maze = maze;
-
-         //cellWidth = Math.Min(windowWidth, windowHeight) / Math.Max(maze.Width, maze.Height);
-         cellWidth = 10;
+         cellWidth = cellSize;
          currentPoint = new Point(cellWidth, cellWidth);
       }
 
